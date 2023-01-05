@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/all.css">
+    <link rel="stylesheet" href="../css/lottery_game.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <title>lottery_game</title>
+
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="container">
+        <nav class="navbar navbar navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://judywork.github.io/Games_Lobby/"><img src="../img/lottery_game/Layer 1.png" alt="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Guide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">stored value</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">personal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 廣告 -->
+        <img src="../img/lottery_game/Group 118.png" class="img-fluid w-100" alt="...">
+        <!-- 金幣餘額 -->
+        <div class="container bg_col mt-3 mb-3">
+            <div class="row">
+                <div class="col-8 d-flex ps-4">
+                    <p class="pt-3 fw-bolder">金幣餘額 :</p>
+                    <img src="../img/lottery_game/Rectangle 340.png" class="img-fluid pt-1 pb-1 money_img" alt="...">
+                    <p class="pt-3 text-100">100</p>
+                </div>
+                <div class="col-4 p-2 ps-2">
+                    <a class="btn p-0" href="./page/index.html" role="button">
+                        <img src="../img/lottery_game/Group 119.png" class="img-fluid" alt="...">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 遊戲 -->
+        <div id="bg" class="mb-3">
+            <div id="container">
+                <ul id="list">
+                    <!-- img標籤放獎品圖片 -->
+                    <!-- mask類爲抽獎滾動起來的標記 -->
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <span id="startbutton" onclick="startlottery()"
+                        style="background-color:#F46A5E;color:white;font-size: 2em;font-weight: 800;">點擊</span>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                    <li><img src="../img/lottery_game/rb.png" />
+                        <div class="mask"></div>
+                    </li>
+                </ul>
+                <div id="message"></div><!-- 獲獎信息展示 -->
+            </div>
+        </div>
+        <!-- 得獎人 -->
+        <img src="../img/lottery_game/Group 120.png" class="img-fluid w-100" alt="...">
+        <!-- 底部 -->
+        <div class="row sha">
+            <div class="col pt-2 pb-2 d-flex justify-content-around">
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 121.png" class="img-fluid" alt="...">
+                </a>
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 122.png" class="img-fluid" alt="...">
+                </a>
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 123.png" class="img-fluid" alt="...">
+                </a>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+<script type="text/javascript">
+
+    var container = document.getElementById('container'),
+        li = container.getElementsByTagName('li'),
+        span = document.getElementById('startbutton'),
+        message = document.getElementById('message'),
+        timer = null;
+    bReady = true;//定義一個抽獎開關
+
+    var prize = [0, 1, 2, 4, 7, 6, 5, 3];//獎品li標籤滾動的順序
+
+    var num = 0;//num用來存放得到的隨機函數，也就是抽中的獎品
+
+    //開始抽獎
+    function startlottery() {
+        if (bReady) {//當抽獎開關爲true的時候，可點擊抽獎
+            message.style.display = "none";//將獲獎信息div隱藏（以防止上次抽獎信息還顯示）
+            span.style.background = "#838383"; //按下後顏色
+            bReady = false;//抽獎開關設爲false 處於抽獎中 即不能點擊抽獎
+            num = getrandomnum(1, 9)//得到一個隨機數（即獎品）
+            // console.log(num)
+            startinit(num);//執行抽獎初始化
+        }
+    }
+
+
+    //抽中的獎品 返回1-9的整數，包含1，不包含9
+    function getrandomnum(n, m) {
+        return parseInt((m - n) * Math.random() + n);
+    }
+
+
+    //抽獎初始化
+    function startinit(num) {
+        var i = 0;  //定義一個i 用來計算抽獎跑動的總次數
+        var t = 200;  //抽獎跑動的速度 初始爲200毫秒
+        var rounds = 2;  //抽獎轉動的圈數
+        var rNum = rounds * 8;  //標記跑動的次數（這是一個條件判斷分界線）
+        timer = setTimeout(startscroll, t);//每t毫秒執行startscroll函數
+
+
+        //抽獎滾動的函數
+        function startscroll() {
+
+            //每次滾動抽獎將所有li的class都設爲空
+            for (var j = 0; j < li.length; j++) {
+                li[j].className = '';
+            }
+
+            var prizenum = prize[i % li.length];  //通過i餘8得到此刻在prize數組中的數字，該數字就是mask標記出現的位置
+            li[prizenum].className = "active";
+            i++;
+
+            if (i < rNum - 8) {  //當i小於轉(rNum-8次)的數量，t不變還是200毫秒
+                timer = setTimeout(startscroll, t);//繼續執行抽獎滾動
+            } else if (i >= rNum - 8 && i < rNum + num) {
+                //t時間變長，此時計時器運行速度降低，同時標籤刷新速度也降低
+                t += (i - rNum + 8) * 5;
+                timer = setTimeout(startscroll, t);//繼續執行抽獎滾動
+            }
+            if (i >= rNum + num) {//當i大於轉rNum加隨機數字num次計時器結束，出現提示框提示中獎信息
+
+                if (num == 1) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';
+                } else if (num == 2) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了50金幣"
+                } else if (num == 3) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了(BTC)0.001"
+                } else if (num == 4) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了(DOGE)0.07"
+                } else if (num == 5) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了20金幣"
+                } else if (num == 6) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了(BTC)0.01"
+                } else if (num == 7) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了70金幣"
+                } else if (num == 8) {
+                    message.innerHTML = '<img src="../img/lottery_game/win.png" alt="" class="img_size"><h2 class="win">Congratulations !!</h2><div class="win_text">恭喜你中了100金幣</div>';//"恭喜你中了(ETH)0.007"
+                }
+
+                var timer2 = null;
+                timer2 = setTimeout(function () {
+                    message.style.display = "block";//獎品展示的信息爲顯示狀態
+                    span.style.background = "#f5786e";
+                    clearTimeout(timer2);
+                }, 1000);
+                bReady = true;//當計時器結束後讓span標籤變爲抽獎狀態
+                clearTimeout(timer);
+
+            }
+        }
+    }
+    //點擊空白處隱藏獲獎視窗
+    document.onclick = function () {
+        message.style.display = "none";
+    }
+
+</script>
+
+</html>

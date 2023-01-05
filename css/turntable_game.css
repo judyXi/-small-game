@@ -1,0 +1,49 @@
+.bg{
+    background-size: 100px 100px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 20px;
+    padding-bottom: 30px;
+    height: 400px;
+    font-family: "Noto Sans TC", sans-serif;
+}
+
+.wrapper{
+    width:100%;
+    max-width:380px;
+    position: relative;
+    margin:0px auto;
+    top: -365px;
+    left: 0px;
+}
+.part2{
+    background:url(../img/turntable_game/Group_103.png) center center no-repeat;
+    background-size:100% 100%;
+    padding-top:100%;
+}
+.rotate-pointer{
+    position:absolute;
+    top:45%;
+    left:50%;
+    width:30%;
+    height:30%;
+    margin-left:-15%;
+    margin-top:-15%;
+    background:url(../img/turntable_game/Group_106.png) center center no-repeat;
+    background-size:100% 100%;
+}
+
+.part2 {
+    transition: transform 10.5s;
+    transition-timing-function: cubic-bezier(0.50, 0, 0, 0.99); /*調整旋轉速度和起始速率*/
+}
+
+/* 背景方框 */
+.bg-0{
+    width: 350px;
+    height: 350px;
+    background-color: #FFD25F;
+    position: relative;
+    margin: 0 auto;
+    border-radius: 13px;
+}

@@ -1,0 +1,206 @@
+<html>
+
+<head>
+    <meta charset="utf8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="轉盤抽獎">
+    <meta name="description" content="轉盤抽獎">
+    <meta name="robots" content="all">
+    <meta name="baiduspider" content="all">
+    <meta name="googlebot" content="all">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/turntable_game.css">
+    <link rel="stylesheet" href="../css/all.css">
+    <script src="../js/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+        crossorigin="anonymous"></script>
+    <title>turntable_game</title>
+</head>
+
+<body>
+    <!-- 導覽列 -->
+    <div class="container">
+        <nav class="navbar navbar navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="https://judywork.github.io/Games_Lobby/"><img src="../img/lottery_game/Layer 1.png" alt="#"></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Guide</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">stored value</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">personal</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- 廣告 -->
+        <img src="../img/turntable_game/Group 118.png" class="img-fluid w-100" alt="...">
+        <!-- 金幣餘額 -->
+        <div class="container bg_col mt-3 mb-3">
+            <div class="row">
+                <div class="col-8 d-flex ps-4">
+                    <p class="pt-3 fw-bolder">金幣餘額 :</p>
+                    <img src="../img/lottery_game/Rectangle 340.png" class="img-fluid pt-1 pb-1 money_img" alt="...">
+                    <p class="pt-3 text-100">100</p>
+                </div>
+                <div class="col-4 p-2 ps-2">
+                    <a class="btn p-0" href="#" role="button">
+                        <img src="../img/lottery_game/Group 119.png" class="img-fluid" alt="...">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 遊戲 -->
+        
+        <div class="bg">
+            <div class="bg-0"></div>
+            <div class="wrapper" id="wrapper">
+                <div class="part2">
+                </div>
+                <div id="pointer" class="rotate-pointer" data-click=""></div>
+            </div>
+        </div>
+
+        <!-- 得獎人 -->
+        <img src="../img/lottery_game/Group 120.png" class="img-fluid w-100" alt="...">
+        <!-- 底部 -->
+        <div class="row sha">
+            <div class="col pt-2 pb-2 d-flex justify-content-around">
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 121.png" class="img-fluid" alt="...">
+                </a>
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 122.png" class="img-fluid" alt="...">
+                </a>
+                <a class="btn" href="#" role="button">
+                    <img src="../img/lottery_game/Group 123.png" class="img-fluid" alt="...">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 測試抽獎
+        (function () {
+            var btn = $("#pointer"),
+                options = {
+                };
+
+            // 獎品角度
+            options.gifts = {
+                "1": {
+                    id: "1",
+                    name: "(ETH)0.07元",
+                    angleStart: -30,
+                    angleEnd: 14,
+                    tips: "恭喜您獲得(ETH)0.07元~~"
+                },
+                "2": {
+                    id: "2",
+                    name: "(BTC)0.07元",
+                    angleStart: 15,
+                    angleEnd: 59,
+                    tips: "恭喜您獲得(BTC)0.07元~~"
+                },
+                "3": {
+                    id: "3",
+                    name: "(USTD)0.07元",
+                    angleStart: 60,
+                    angleEnd: 104,
+                    tips: "恭喜您獲得(USTD)0.07元~~"
+                },
+                "4": {
+                    id: "4",
+                    name: "(DOGE)0.07元",
+                    angleStart: 105,
+                    angleEnd: 149,
+                    tips: "恭喜您獲得(DOGE)0.07元~~"
+                },
+                "5": {
+                    id: "5",
+                    name: "(ETH)0.07元",
+                    angleStart: 150,
+                    angleEnd: 194,
+                    tips: "恭喜您獲得(ETH)0.07元~~"
+                },
+                "6": {
+                    id: "6",
+                    name: "(BTC)0.07元",
+                    angleStart: 195,
+                    angleEnd: 239,
+                    tips: "恭喜您獲得(BTC)0.07元~~"
+                },
+                "7": {
+                    id: "7",
+                    name: "(USTD)0.07元",
+                    angleStart: 240,
+                    angleEnd: 284,
+                    tips: "恭喜您獲得(USTD)0.07元~~"
+                },
+                "8": {
+                    id: "8",
+                    name: "(DOGE)0.07元",
+                    angleStart: 285,
+                    angleEnd: 330,
+                    tips: "恭喜您獲得(DOGE)0.07元~~"
+                },
+            };
+
+            // 獲取[n,m]的隨機數
+            function getRandom(n, m) {
+                var num = Math.floor(Math.random() * (m - n + 1) + n)
+                return num
+            }
+            function _begin() {
+
+                var base = 2160; //和transition: transform 10.5s;對應 ，先轉滿6圈
+
+                var result = getRandom(-30, 300); // 獲取隨機數
+
+                var _key = null; // 內定獎品id
+
+                if (_key) {
+                    result = getRandom(options.gifts[_key].angleStart, options.gifts[_key].angleEnd)
+                }
+
+                // result = 40
+                var deg = (base + result)
+
+                $(".part2").css({ "transform": "rotate(" + deg + "deg)" });
+
+                $(".part2").on('transitionend', function () {
+                    console.log(result)
+                    for (var key in options.gifts) {
+
+                        if (options.gifts[key].angleStart <= result && result <= options.gifts[key].angleEnd) {
+
+                            confirm(options.gifts[key].tips);
+                            window.location.reload()
+
+                        }
+                    }
+                })
+            }
+
+            btn.on("click", _begin);
+        })();
+
+    </script>
+
+</html>
